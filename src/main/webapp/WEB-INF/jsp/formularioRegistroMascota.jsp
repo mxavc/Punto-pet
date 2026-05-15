@@ -11,13 +11,20 @@
 </div>
 
 <div class="form-container">
+    <c:if test="${not empty mensajeExito}">
+        <div class="success-message">${mensajeExito}</div>
+    </c:if>
+    <c:if test="${not empty error}">
+        <div class="error-message">${error}</div>
+    </c:if>
     <form:form action="/mascotas/guardar" modelAttribute="mascota" method="POST" enctype="multipart/form-data">
         
         <div class="form-section">
             <h3>Informacion de la Mascota</h3>
             <label>Nombre de la Mascota:</label>
-            <form:input path="nombre" placeholder="Ej: Sparky" />
+            <form:input path="nombre" id="nombre" placeholder="Ej: Sparky" />
             <form:errors path="nombre" cssClass="error-message" />
+            <span id="nombreError" class="realtime-error" style="display:none;">El nombre solo debe contener letras.</span>
 
             <label>Especie:</label>
             <form:select path="especie" id="especie" onchange="cargarRazas()">
@@ -39,13 +46,22 @@
             
             <label>Fecha de Nacimiento:</label>
             <form:input path="fechaNacimiento" type="date" />
+
+            <label>Peso (kg):</label>
+            <form:input path="peso" type="number" step="0.1" />
+            <form:errors path="peso" cssClass="error-message" />
+
+            <label>Altura (cm):</label>
+            <form:input path="altura" type="number" step="0.1" />
+            <form:errors path="altura" cssClass="error-message" />
         </div>
 
         <div class="form-section">
             <h3>Informacion del Duenio</h3>
             <label>Nombre del Duenioo:</label>
-            <form:input path="nombreDueno" placeholder="Nombre y Apellido" />
+            <form:input path="nombreDueno" id="nombreDueno" placeholder="Nombre y Apellido" />
             <form:errors path="nombreDueno" cssClass="error-message" />
+            <span id="nombreDuenoError" class="realtime-error" style="display:none;">El nombre del duenio solo debe contener letras.</span>
             <label>Telefono de Contacto:</label>
             <form:input path="telefonoDueno" placeholder="0999999999" />
             <form:errors path="telefonoDueno" cssClass="error-message" />
@@ -58,7 +74,7 @@
         <label>Fotos (1-5):</label>
         <input type="file" name="filesFotos" multiple accept="image/*" />
 
-        <button type="submit">Finalizar Registro ✨</button>
+        <button type="submit">Finalizar Registro</button>
     </form:form>
 </div>
 
@@ -86,6 +102,25 @@
             opt.innerHTML = "Seleccione especie";
             razaSelect.appendChild(opt);
         }
+    }
+
+    function validarSoloLetras(inputEl, errorEl) {
+        const valor = inputEl.value || "";
+        const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(valor) || valor.length === 0;
+        errorEl.style.display = soloLetras ? "none" : "block";
+    }
+
+    const nombreInput = document.getElementById("nombre");
+    const nombreError = document.getElementById("nombreError");
+    const nombreDuenoInput = document.getElementById("nombreDueno");
+    const nombreDuenoError = document.getElementById("nombreDuenoError");
+
+    if (nombreInput && nombreError) {
+        nombreInput.addEventListener("input", () => validarSoloLetras(nombreInput, nombreError));
+    }
+
+    if (nombreDuenoInput && nombreDuenoError) {
+        nombreDuenoInput.addEventListener("input", () => validarSoloLetras(nombreDuenoInput, nombreDuenoError));
     }
 </script>
 </body>

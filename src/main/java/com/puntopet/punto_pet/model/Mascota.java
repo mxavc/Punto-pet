@@ -17,7 +17,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "mascotas")
@@ -42,11 +43,13 @@ public class Mascota {
     @Past(message = "La fecha no puede ser superior a la fecha actual")
     private LocalDate fechaNacimiento;
     
-    @Min(value = 1, message = "El peso debe ser mayor a 0")
-    private double peso;
-    
-    @Min(value = 1, message = "La altura debe ser mayor a 0")
-    private double altura;
+    @NotNull(message = "El peso es obligatorio")
+    @DecimalMin(value = "0.0", inclusive = false, message = "El peso debe ser mayor a 0")
+    private Double peso;
+
+    @NotNull(message = "La altura es obligatoria")
+    @DecimalMin(value = "0.0", inclusive = false, message = "La altura debe ser mayor a 0")
+    private Double altura;
 
     @NotBlank(message = "El nombre del dueño es obligatorio")
     @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", message = "El nombre del dueño solo debe contener letras")
@@ -114,19 +117,19 @@ public class Mascota {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public double getPeso() {
+    public Double getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(Double peso) {
         this.peso = peso;
     }
 
-    public double getAltura() {
+    public Double getAltura() {
         return altura;
     }
 
-    public void setAltura(double altura) {
+    public void setAltura(Double altura) {
         this.altura = altura;
     }
 

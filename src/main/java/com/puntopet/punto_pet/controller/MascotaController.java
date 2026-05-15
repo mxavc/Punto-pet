@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
@@ -38,16 +39,17 @@ public class MascotaController {
                                 BindingResult result,
                                 @RequestParam("fileCertificado") MultipartFile certificado,
                                 @RequestParam("filesFotos") List<MultipartFile> fotos,
-                                Model model) {
-        
+                                Model model,
+                                RedirectAttributes redirectAttributes) {
+
         if (result.hasErrors()) return "formularioRegistroMascota";
 
         try {
             service.registrarMascota(mascota, certificado, fotos);
-            model.addAttribute("mensajeExito", "Documentación ingresada exitosamente");
-            return "formularioRegistroMascota";
+            redirectAttributes.addFlashAttribute("mensajeExito", "Documentación ingresada exitosamente");
+            return "redirect:/mascotas/registro";
         } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
+            model.addAttribute("error", "Error al guardar la mascota: " + e.getMessage());
             return "formularioRegistroMascota";
         }
     }
