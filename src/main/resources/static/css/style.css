@@ -1,0 +1,97 @@
+/* style.css */
+body {
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header-container {
+    padding: 20px 40px;
+}
+
+.main-title {
+    color: #4a4a4a;
+    font-size: 2.2rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-container {
+    background: #ffffff;
+    max-width: 650px;
+    margin: 20px auto;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+}
+
+.form-section {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.form-section h3 {
+    color: #3498db;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 8px;
+    display: block;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #edeff2;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: #3498db;
+    background-color: #fcfdfe;
+}
+
+button {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.radio-group {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 20px;
+}
+
+.realtime-error {
+    color: #d93025;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: -6px 0 12px;
+    display: block;
+}
+
+.success-message {
+    color: #1b7f3a;
+    background-color: #e6f6ec;
+    border: 1px solid #b7e4c7;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin: 0 0 16px;
+}
