@@ -53,4 +53,8 @@ public class MascotaService {
         // 4. Persistencia (CA01.8)
         return mascotaRepository.save(mascota);
     }
+
+    public Mascota obtenerPorId(Long id) {
+        return mascotaRepository.findById(id).orElse(null); // CA01.11
+    }
 }

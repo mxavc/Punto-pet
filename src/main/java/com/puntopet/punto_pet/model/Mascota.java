@@ -11,19 +11,23 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Min;
 
 @Entity
+@Table(name = "mascotas")
 public class Mascota {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "El nombre es obligatorio")
+    @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$", message = "El nombre solo debe contener letras")
     private String nombre;
 
     @NotBlank(message = "La especie es obligatoria")
@@ -44,7 +48,12 @@ public class Mascota {
     @Min(value = 1, message = "La altura debe ser mayor a 0")
     private double altura;
 
+    @NotBlank(message = "El nombre del dueño es obligatorio")
+    @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", message = "El nombre del dueño solo debe contener letras")
     private String nombreDueno;
+    
+    @NotBlank(message = "El teléfono es obligatorio")
+    @Pattern(regexp = "^[0-9]+$", message = "El teléfono solo debe contener números")
     private String telefonoDueno;
 
     @Lob
