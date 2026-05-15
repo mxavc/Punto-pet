@@ -6,25 +6,12 @@ Guía de Ejecución Paso a Paso
 Paso 1: Levantar la Base de Datos (PostgreSQL)
 Para evitar conflictos con puertos comunes ocupados localmente, la base de datos se ejecuta en un contenedor Docker con mapeo a puertos personalizados.
 Abre una terminal y posiciónate en la carpeta raíz del proyecto (donde se encuentra el archivo docker-compose.yml).
-Ejecuta el siguiente comando para descargar la imagen y levantar el contenedor en segundo plano:
-docker-compose up -d
-Ejecutar la Aplicación Spring Boot
-Una vez que la base de datos está activa, puedes levantar la aplicación backend.
-
-Opción A: Desde el IDE (Recomendado para revisión de código)
-Abre el proyecto en tu IDE
-Navega por el árbol de directorios hasta encontrar el archivo principal de ejecución. La ruta exacta es:
-src/main/java/com/puntopet/punto_pet/PuntoPetApplication.java
-Haz clic derecho sobre el archivo PuntoPetApplication.java y selecciona "Run" (o el ícono de "Play").
-Acceder a la Aplicación
-La aplicación cuenta con un enrutamiento inteligente configurado para facilitar la navegación desde el primer momento.
-
-Abre tu navegador web de preferencia (Chrome, Firefox, Edge).
-
-Ingresa a la siguiente URL raíz:
-http://localhost:8080/
+1. Clonar el proyecto
+2. Abrir el IDE IntellijIDEA y abrir el proyecto clonado
+3. En la raiz del proyecto, ejecutar el siguiente comando para descargar e iniciar la base de datos: docker-compose up -d
+4. Verificar que el contenedor esté corriendo correctamente con: docker ps
+5. Buscar el archivo PuntoPetApplication.java en la ruta src/main/java/com/puntopet/punto_pet/PuntoPetApplication.java y ejecutar la aplicación desde el IDE
+6. Abrir el navegador y acceder a http://localhost:8080/ para ser redirigido automáticamente al formulario de registro de mascotas en http://localhost:8080/mascotas/registro
+7. Para detener la base de datos, puedes usar el comando: docker-compose down -v
 
 Comportamiento esperado: El sistema interceptará esta petición a la raíz y realizará una redirección automática (redirect:/mascotas/registro) enviándote directamente al formulario principal.
-
-URL final: Terminarás visualizando el formulario de la primera Historia de Usuario (HU01) en:
-http://localhost:8080/mascotas/registro
