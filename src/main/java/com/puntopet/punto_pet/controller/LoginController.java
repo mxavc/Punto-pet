@@ -13,11 +13,6 @@ public class LoginController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/")
-    public String index(){
-        return "redirect:/login";
-    }
-
     @GetMapping("/login")
     public String mostrarLogin(){
         return "login";
