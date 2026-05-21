@@ -76,7 +76,7 @@ public class MascotaController {
         String usuario = (String) session.getAttribute("usuarioLogeado");
         if (usuario == null) return "redirect:/login";
 
-        List<Mascota> misMascotas = service.listarPorDuenio(usuario);
+        List<Mascota> misMascotas = service.listarPorDueno(usuario);
         model.addAttribute("mascotas", misMascotas);
         return "misMascotas"; // Carga misMascotas.jsp
     }

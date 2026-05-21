@@ -5,12 +5,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.puntopet.punto_pet.model.Mascota;
 import com.puntopet.punto_pet.repository.MascotaRepository;
 
 @Service
+@Transactional
 public class MascotaService {
 
     private final MascotaRepository mascotaRepository;
@@ -58,7 +60,7 @@ public class MascotaService {
         return mascotaRepository.findById(id).orElse(null);
     }
 
-    public List<Mascota> listarPorDuenio(String duenoId) {
+    public List<Mascota> listarPorDueno(String duenoId) {
         return mascotaRepository.findByDuenoId(duenoId);
     }
 
@@ -87,5 +89,21 @@ public class MascotaService {
         }
 
         mascotaRepository.save(mascota);
+    }
+
+    public List<Mascota> buscarParejasDisponibles(Long mascotaId, String tipoFiltro, String duenoIdLogueado) {
+        Mascota miMascota = mascotaRepository.findById(mascotaId)
+                .orElseThrow(() -> new IllegalArgumentException("Mascota no encontrada")); //
+
+        // Determinar el sexo opuesto para la reproducción
+        String sexoPareja = miMascota.getSexo().equalsIgnoreCase("Macho") ? "Hembra" : "Macho";
+        String especie = miMascota.getEspecie();
+        String raza = miMascota.getRaza();
+
+        if ("MISMA_RAZA".equals(tipoFiltro)) {
+            return mascotaRepository.findByEspecieAndRazaAndSexoAndDuenoIdNot(especie, raza, sexoPareja, duenoIdLogueado);
+        } else {
+            return mascotaRepository.findByEspecieAndRazaNotAndSexoAndDuenoIdNot(especie, raza, sexoPareja, duenoIdLogueado);
+        }
     }
 }
