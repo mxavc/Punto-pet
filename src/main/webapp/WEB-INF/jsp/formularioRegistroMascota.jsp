@@ -56,17 +56,6 @@
             <form:errors path="altura" cssClass="error-message" />
         </div>
 
-        <div class="form-section">
-            <h3>Informacion del Duenio</h3>
-            <label>Nombre del Duenioo:</label>
-            <form:input path="nombreDueno" id="nombreDueno" placeholder="Nombre y Apellido" />
-            <form:errors path="nombreDueno" cssClass="error-message" />
-            <span id="nombreDuenoError" class="realtime-error" style="display:none;">El nombre del duenio solo debe contener letras.</span>
-            <label>Telefono de Contacto:</label>
-            <form:input path="telefonoDueno" placeholder="0999999999" />
-            <form:errors path="telefonoDueno" cssClass="error-message" />
-        </div>
-
         <!-- Archivos -->
         <label>Certificado Pedigree (PDF):</label>
         <input type="file" name="fileCertificado" accept=".pdf" />

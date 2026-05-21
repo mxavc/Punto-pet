@@ -55,6 +55,37 @@ public class MascotaService {
     }
 
     public Mascota obtenerPorId(Long id) {
-        return mascotaRepository.findById(id).orElse(null); // CA01.11
+        return mascotaRepository.findById(id).orElse(null);
+    }
+
+    public List<Mascota> listarPorDuenio(String duenoId) {
+        return mascotaRepository.findByDuenoId(duenoId);
+    }
+
+    public void actualizarMascota(Long id, double peso, double altura, MultipartFile certificado, List<MultipartFile> nuevasFotos) throws IOException {
+        Mascota mascota = mascotaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Mascota no encontrada"));
+
+        // Actualización de rangos básicos
+        if (peso <= 0 || altura <= 0) throw new IllegalArgumentException("Peso y altura deben ser mayores a 0");
+        mascota.setPeso(peso);
+        mascota.setAltura(altura);
+
+        // Adjuntar nuevo certificado si se subió uno
+        if (certificado != null && !certificado.isEmpty()) {
+            if (!"application/pdf".equals(certificado.getContentType())) {
+                throw new IllegalArgumentException("Solo se permiten archivos PDF");
+            }
+            mascota.setCertificadoPdf(certificado.getBytes());
+        }
+
+        // Agregar nuevas fotos si existen sin borrar el historial previo
+        if (nuevasFotos != null && !nuevasFotos.isEmpty() && !nuevasFotos.get(0).isEmpty()) {
+            for (MultipartFile foto : nuevasFotos) {
+                mascota.getFotos().add(foto.getBytes());
+            }
+        }
+
+        mascotaRepository.save(mascota);
     }
 }

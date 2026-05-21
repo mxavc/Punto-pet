@@ -50,6 +50,7 @@
 
         <div class="button-group">
             <a href="/mascotas/registro" class="btn-nav">➕ Registrar nueva Mascota</a>
+            <a href="/mascotas/mis-mascotas" class="btn-nav" style="background: #2ecc71;">📋 Ver Mis Mascotas</a>
         </div>
 
         <div style="margin-top: 20px;">
