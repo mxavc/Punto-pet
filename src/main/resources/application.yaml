@@ -1,4 +1,8 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB       # Tamaño máximo permitido para un archivo individual (ej: el PDF)
+      max-request-size: 50MB    # Tamaño máximo total de la solicitud (todas las fotos combinadas)
   datasource:
     url: jdbc:postgresql://localhost:5440/puntopet
     username: admin

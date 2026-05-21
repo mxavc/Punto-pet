@@ -4,16 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
@@ -51,13 +42,7 @@ public class Mascota {
     @DecimalMin(value = "0.0", inclusive = false, message = "La altura debe ser mayor a 0")
     private Double altura;
 
-    @NotBlank(message = "El nombre del dueño es obligatorio")
-    @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", message = "El nombre del dueño solo debe contener letras")
-    private String nombreDueno;
-    
-    @NotBlank(message = "El teléfono es obligatorio")
-    @Pattern(regexp = "^[0-9]+$", message = "El teléfono solo debe contener números")
-    private String telefonoDueno;
+    private String duenoId;
 
     @Lob
     private byte[] certificadoPdf;
@@ -67,6 +52,17 @@ public class Mascota {
     @Lob
     @Column(name = "foto_bytes")
     private List<byte[]> fotos = new ArrayList<>();
+
+    @Transient
+    public String getEdadCalculada(){
+        if(this.fechaNacimiento == null) return "Edad desconocida";
+        java.time.Period periodo = java.time.Period.between(this.fechaNacimiento, java.time.LocalDate.now());
+        if (periodo.getYears()>0){
+            return periodo.getYears() + ((periodo.getYears() == 1)? " año" : " años");
+        } else {
+            return periodo.getMonths() + ((periodo.getMonths() == 1)? " mes" : " meses");
+        }
+    }
 
     // Getters y Setters
     public Long getId() {
@@ -133,21 +129,9 @@ public class Mascota {
         this.altura = altura;
     }
 
-    public String getNombreDueno() {
-        return nombreDueno;
-    }
+    public String getDuenoId() { return duenoId; }
 
-    public void setNombreDueno(String nombreDueno) {
-        this.nombreDueno = nombreDueno;
-    }
-
-    public String getTelefonoDueno() {
-        return telefonoDueno;
-    }
-
-    public void setTelefonoDueno(String telefonoDueno) {
-        this.telefonoDueno = telefonoDueno;
-    }
+    public void setDuenoId(String duenoId) { this.duenoId = duenoId; }
 
     public byte[] getCertificadoPdf() {
         return certificadoPdf;
@@ -155,5 +139,13 @@ public class Mascota {
 
     public void setCertificadoPdf(byte[] certificadoPdf) {
         this.certificadoPdf = certificadoPdf;
+    }
+
+    public List<byte[]> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(List<byte[]> fotos) {
+        this.fotos = fotos;
     }
 }

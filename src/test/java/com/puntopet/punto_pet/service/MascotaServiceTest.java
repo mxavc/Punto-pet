@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -44,8 +45,7 @@ public class MascotaServiceTest {
         mascota.setFechaNacimiento(LocalDate.now().minusYears(1));
         mascota.setPeso(25.5);
         mascota.setAltura(0.6);
-        mascota.setNombreDueno("Juan Perez");
-        mascota.setTelefonoDueno("1234567890");
+
 
         certificadoPdf = mock(MultipartFile.class);
         fotos = new ArrayList<>();
@@ -139,5 +139,23 @@ public class MascotaServiceTest {
         mascotaService.registrarMascota(mascota, certificadoPdf, fotos);
 
         verify(mascotaRepository, times(1)).save(mascota);
+    }
+
+    @Test
+    @DisplayName("HU02 - Debería lanzar excepción si el peso de actualización es menor o igual a cero")
+    void testActualizarPesoInvalido() {
+        // GIVEN: Un ID simulado y un registro existente
+        Long idSimulado = 1L;
+        Mascota mascotaSimulada = new Mascota();
+        mascotaSimulada.setNombre("Clifford");
+
+        when(mascotaRepository.findById(idSimulado)).thenReturn(Optional.of(mascotaSimulada));
+
+        // WHEN & THEN: Intentamos actualizar con peso inválido (-2.5 kg) y esperamos fallo
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            mascotaService.actualizarMascota(idSimulado, -2.5, 45.0, null, new ArrayList<>());
+        });
+
+        assertEquals("Peso y altura deben ser mayores a 0", exception.getMessage());
     }
 }

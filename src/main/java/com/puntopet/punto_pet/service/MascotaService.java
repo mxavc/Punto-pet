@@ -5,12 +5,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.puntopet.punto_pet.model.Mascota;
 import com.puntopet.punto_pet.repository.MascotaRepository;
 
 @Service
+@Transactional
 public class MascotaService {
 
     private final MascotaRepository mascotaRepository;
@@ -55,6 +57,53 @@ public class MascotaService {
     }
 
     public Mascota obtenerPorId(Long id) {
-        return mascotaRepository.findById(id).orElse(null); // CA01.11
+        return mascotaRepository.findById(id).orElse(null);
+    }
+
+    public List<Mascota> listarPorDueno(String duenoId) {
+        return mascotaRepository.findByDuenoId(duenoId);
+    }
+
+    public void actualizarMascota(Long id, double peso, double altura, MultipartFile certificado, List<MultipartFile> nuevasFotos) throws IOException {
+        Mascota mascota = mascotaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Mascota no encontrada"));
+
+        // Actualización de rangos básicos
+        if (peso <= 0 || altura <= 0) throw new IllegalArgumentException("Peso y altura deben ser mayores a 0");
+        mascota.setPeso(peso);
+        mascota.setAltura(altura);
+
+        // Adjuntar nuevo certificado si se subió uno
+        if (certificado != null && !certificado.isEmpty()) {
+            if (!"application/pdf".equals(certificado.getContentType())) {
+                throw new IllegalArgumentException("Solo se permiten archivos PDF");
+            }
+            mascota.setCertificadoPdf(certificado.getBytes());
+        }
+
+        // Agregar nuevas fotos si existen sin borrar el historial previo
+        if (nuevasFotos != null && !nuevasFotos.isEmpty() && !nuevasFotos.get(0).isEmpty()) {
+            for (MultipartFile foto : nuevasFotos) {
+                mascota.getFotos().add(foto.getBytes());
+            }
+        }
+
+        mascotaRepository.save(mascota);
+    }
+
+    public List<Mascota> buscarParejasDisponibles(Long mascotaId, String tipoFiltro, String duenoIdLogueado) {
+        Mascota miMascota = mascotaRepository.findById(mascotaId)
+                .orElseThrow(() -> new IllegalArgumentException("Mascota no encontrada")); //
+
+        // Determinar el sexo opuesto para la reproducción
+        String sexoPareja = miMascota.getSexo().equalsIgnoreCase("Macho") ? "Hembra" : "Macho";
+        String especie = miMascota.getEspecie();
+        String raza = miMascota.getRaza();
+
+        if ("MISMA_RAZA".equals(tipoFiltro)) {
+            return mascotaRepository.findByEspecieAndRazaAndSexoAndDuenoIdNot(especie, raza, sexoPareja, duenoIdLogueado);
+        } else {
+            return mascotaRepository.findByEspecieAndRazaNotAndSexoAndDuenoIdNot(especie, raza, sexoPareja, duenoIdLogueado);
+        }
     }
 }
