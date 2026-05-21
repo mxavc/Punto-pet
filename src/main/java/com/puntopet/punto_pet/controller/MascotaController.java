@@ -64,7 +64,7 @@ public class MascotaController {
         try {
             service.registrarMascota(mascota, certificado, fotos);
             redirectAttributes.addFlashAttribute("mensajeExito", "Documentación ingresada exitosamente");
-            return "redirect:/mascotas/registro";
+            return "redirect:/home";
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar la mascota: " + e.getMessage());
             return "formularioRegistroMascota";
