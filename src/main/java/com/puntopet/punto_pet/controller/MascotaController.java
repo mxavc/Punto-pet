@@ -2,6 +2,7 @@ package com.puntopet.punto_pet.controller;
 
 import com.puntopet.punto_pet.model.Mascota;
 import com.puntopet.punto_pet.service.MascotaService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,15 +24,22 @@ public class MascotaController {
 
     // Si entras a localhost:8080/mascotas/ te lleva al formulario
     @GetMapping("/")
-    public String index() {
+    public String index(HttpSession session) {
+        if (session.getAttribute("usuarioLogeado") == null) {
+            return "redirect:/login";
+        }
         return "redirect:/mascotas/registro";
     }
 
     @GetMapping("/registro")
-    public String mostrarFormulario(Model model) {
-        model.addAttribute("mascota", new Mascota());
-        // DEBE coincidir con el nombre del archivo .jsp (sin la extensión)
-        return "formularioRegistroMascota"; 
+    public String mostrarFormulario(Model model, HttpSession session) {
+        if (session.getAttribute("usuarioLogeado") == null) {
+            return "redirect:/login";
+        }
+        if (!model.containsAttribute("mascota")) {
+            model.addAttribute("mascota", new Mascota());
+            }
+        return "formularioRegistroMascota";
     }
 
     @PostMapping("/guardar")
@@ -40,7 +48,12 @@ public class MascotaController {
                                 @RequestParam("fileCertificado") MultipartFile certificado,
                                 @RequestParam("filesFotos") List<MultipartFile> fotos,
                                 Model model,
-                                RedirectAttributes redirectAttributes) {
+                                RedirectAttributes redirectAttributes,
+                                HttpSession session) {
+
+        if (session.getAttribute("usuarioLogeado") == null){
+            return "redirect:/login";
+        }
 
         if (result.hasErrors()) return "formularioRegistroMascota";
 

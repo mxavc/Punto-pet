@@ -75,7 +75,12 @@
         <input type="file" name="filesFotos" multiple accept="image/*" />
 
         <button type="submit">Finalizar Registro</button>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/home" style="color: #7f8c8d; text-decoration: none; font-size: 0.9rem;">◀ Volver al Panel Principal</a>
+        </div>
     </form:form>
+
+
 </div>
 
 <script>
@@ -99,29 +104,33 @@
         } else {
             let opt = document.createElement("option");
             opt.value = "";
-            opt.innerHTML = "Seleccione especie";
+            opt.innerHTML = "Seleccione primero la especie";
             razaSelect.appendChild(opt);
         }
     }
 
-    function validarSoloLetras(inputEl, errorEl) {
-        const valor = inputEl.value || "";
-        const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(valor) || valor.length === 0;
-        errorEl.style.display = soloLetras ? "none" : "block";
-    }
+    // Validación interactiva en tiempo real para campos de texto (Solo Letras)
+    const regexLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
 
-    const nombreInput = document.getElementById("nombre");
-    const nombreError = document.getElementById("nombreError");
-    const nombreDuenoInput = document.getElementById("nombreDueno");
-    const nombreDuenoError = document.getElementById("nombreDuenoError");
+    document.getElementById("nombre").addEventListener("input", function() {
+        const errorSpan = document.getElementById("nombreError");
+        if (this.value && !regexLetras.test(this.value)) {
+            errorSpan.style.display = "block";
+            errorSpan.style.color = "#e74c3c";
+        } else {
+            errorSpan.style.display = "none";
+        }
+    });
 
-    if (nombreInput && nombreError) {
-        nombreInput.addEventListener("input", () => validarSoloLetras(nombreInput, nombreError));
-    }
-
-    if (nombreDuenoInput && nombreDuenoError) {
-        nombreDuenoInput.addEventListener("input", () => validarSoloLetras(nombreDuenoInput, nombreDuenoError));
-    }
+    document.getElementById("nombreDueno").addEventListener("input", function() {
+        const errorSpan = document.getElementById("nombreDuenoError");
+        if (this.value && !regexLetras.test(this.value)) {
+            errorSpan.style.display = "block";
+            errorSpan.style.color = "#e74c3c";
+        } else {
+            errorSpan.style.display = "none";
+        }
+    });
 </script>
 </body>
 </html>
