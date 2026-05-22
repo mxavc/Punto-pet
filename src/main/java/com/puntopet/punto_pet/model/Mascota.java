@@ -47,7 +47,7 @@ public class Mascota {
     @Lob
     private byte[] certificadoPdf;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "mascota_fotos", joinColumns = @JoinColumn(name = "mascota_id"))
     @Lob
     @Column(name = "foto_bytes")
