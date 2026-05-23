@@ -10,52 +10,23 @@
 <head>
     <title>Punto-pet | Panel Principal</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <style>
-        .dashboard-container {
-            max-width: 600px;
-            margin: 60px auto;
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-        .welcome-title { color: #2c3e50; font-size: 1.8rem; margin-bottom: 10px; }
-        .button-group { margin: 30px 0; }
+<body>
+    <div class="header-container">
+        <h1 class="main-title" style="font-size: 3rem; margin-bottom: 20px;">¡Bienvenido a Punto-pet! 🐾</h1>
+        <p style="color: var(--text-muted); font-size: 1.2rem;">Hola <strong style="color: var(--secondary);">${usuarioLogueado}</strong>, prepárate para gestionar las conexiones de tus mascotas.</p>
+    </div>
 
-        /* Botón estilizado para redirigir al formulario */
-        .btn-nav {
-            display: inline-block;
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            padding: 14px 28px;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .btn-nav:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
-        }
-        .btn-logout { color: #95a5a6; text-decoration: none; font-size: 0.9rem; }
-        .btn-logout:hover { color: #e74c3c; }
-    </style>
-</head>
-<body style="background-color: #f0f2f5;">
-    <div class="dashboard-container">
-        <h1 class="welcome-title">¡Bienvenido a Punto-pet! 🐾</h1>
-        <p style="color: #7f8c8d;">Hola <strong>${usuarioLogueado}</strong>, gestiona los encuentros de tus mascotas.</p>
-
-        <div class="button-group">
-            <a href="/mascotas/registro" class="btn-nav">➕ Registrar nueva Mascota</a>
-            <a href="/mascotas/mis-mascotas" class="btn-nav" style="background: #2ecc71;">📋 Ver Mis Mascotas</a>
-            <a href="/parejas/buscar" class="btn-nav" style="background:#800080;">🔍 Buscar Parejas</a>
+    <div class="form-container glass-panel" style="text-align: center; max-width: 800px; padding: 60px;">
+        <h2 style="color: #FFF; font-weight: 300; margin-bottom: 40px;">¿Qué deseas hacer hoy?</h2>
+        
+        <div class="button-group" style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
+            <a href="/mascotas/registro" class="btn-nav" style="max-width: 400px; background: linear-gradient(135deg, #FF3366, #FF6B6B);">➕ Registrar nueva Mascota</a>
+            <a href="/mascotas/mis-mascotas" class="btn-nav" style="max-width: 400px; background: linear-gradient(135deg, #20E3B2, #00B4D8);">📋 Ver Mis Mascotas</a>
+            <a href="/parejas/buscar" class="btn-nav" style="max-width: 400px; background: linear-gradient(135deg, #9D4EDD, #C77DFF);">🔍 Buscar Parejas</a>
         </div>
 
-        <div style="margin-top: 20px;">
-            <a href="/logout" class="btn-logout">Cerrar Sesión</a>
+        <div style="margin-top: 50px;">
+            <a href="/logout" class="btn-logout" style="color: #FF4B4B; text-decoration: none; font-size: 1rem; font-weight: 600; padding: 10px 20px; border: 1px solid rgba(255, 75, 75, 0.3); border-radius: 20px; transition: all 0.3s;">Cerrar Sesión</a>
         </div>
     </div>
 </body>

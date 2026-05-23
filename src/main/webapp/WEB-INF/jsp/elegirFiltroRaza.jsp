@@ -14,24 +14,24 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <div class="form-container" style="text-align: center;">
-        <h2>¿Qué tipo de pareja buscas? 🧬</h2>
-        <p style="color: #7f8c8d; margin-bottom: 30px;">Selecciona el filtro de raza para prever los cachorros resultantes.</p>
+    <div class="form-container glass-panel" style="text-align: center; margin-top: 100px;">
+        <h2 class="text-gradient" style="font-size: 2rem; margin-bottom: 20px;">¿Qué tipo de pareja buscas? 🧬</h2>
+        <p style="color: var(--text-muted); margin-bottom: 40px; font-size: 1.1rem;">Selecciona el filtro de raza para prever los cachorros resultantes.</p>
 
         <form action="/parejas/resultados" method="GET">
             <input type="hidden" name="mascotaId" value="${mascotaId}" />
 
-            <div style="margin-bottom: 20px;">
-                <button type="submit" name="tipoFiltro" value="MISMA_RAZA" style="background: #2ecc71; margin-bottom: 15px;">
+            <div style="margin-bottom: 30px; display: flex; flex-direction: column; gap: 20px;">
+                <button type="submit" name="tipoFiltro" value="MISMA_RAZA" style="background: linear-gradient(135deg, #20E3B2, #00B4D8);">
                     🤝 Buscar de la Misma Raza
                 </button>
 
-                <button type="submit" name="tipoFiltro" value="OTRA_RAZA" style="background: #e67e22;">
+                <button type="submit" name="tipoFiltro" value="OTRA_RAZA" style="background: linear-gradient(135deg, #FF9A9E, #FECFEF); color: #333;">
                     🔀 Buscar de Diferente Raza
                 </button>
             </div>
         </form>
-        <a href="/home" style="color: #95a5a6; text-decoration: none; font-size: 0.9rem;">Cancelar búsqueda</a>
+        <a href="/home" style="color: var(--danger); text-decoration: none; font-size: 1rem; font-weight: 600; text-transform: uppercase;">Cancelar búsqueda</a>
     </div>
 </body>
 </html>

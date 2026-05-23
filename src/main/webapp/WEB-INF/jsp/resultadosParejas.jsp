@@ -18,31 +18,34 @@
     <h1 class="main-title">Parejas Compatibles Encontradas 🎯</h1>
   </div>
 
-  <div style="max-width: 900px; margin: 0 auto; display: flex; gap: 20px; flex-wrap: wrap; padding: 20px;">
+  <div style="max-width: 1000px; margin: 0 auto; display: flex; gap: 30px; flex-wrap: wrap; padding: 20px; justify-content: center;">
     <c:choose>
       <c:when test="${not empty resultados}">
         <c:forEach var="pareja" items="${resultados}">
-          <div class="card" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); width: 260px; padding: 20px; text-align: center;">
-            <h3 style="margin-bottom: 5px;">${pareja.nombre}</h3>
-            <span style="background: #e1f5fe; color: #0288d1; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">
+          <div class="card" style="width: 280px; text-align: center;">
+            <h3 class="text-gradient" style="margin-bottom: 15px; font-size: 1.8rem;">${pareja.nombre}</h3>
+            <span style="background: rgba(32, 227, 178, 0.15); color: var(--secondary); padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; border: 1px solid rgba(32, 227, 178, 0.3);">
                 ${pareja.raza}
             </span>
-            <p style="color: #555; margin-top: 10px;">Sexo: <strong>${pareja.sexo}</strong></p>
-            <p style="font-size: 0.9rem; color: #7f8c8d;">Edad: ${pareja.edadCalculada}</p>
+            <p style="color: #FFF; margin-top: 20px; font-size: 1.1rem;">Sexo: <strong style="color: var(--primary);">${pareja.sexo}</strong></p>
+            <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 25px;">Edad: ${pareja.edadCalculada}</p>
 
-            <div style="margin-top: 15px;">
-              <a href="/mascotas/detalle/${pareja.id}" style="background: #3498db; color: white; padding: 8px 16px; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: bold; display: block;">Ver Documentación</a>
+            <div>
+              <a href="/mascotas/detalle/${pareja.id}" class="btn-nav" style="padding: 12px 20px; font-size: 0.9rem; display: block;">Ver Documentación</a>
             </div>
           </div>
         </c:forEach>
       </c:when>
       <c:otherwise>
-        <div style="width: 100%; text-align: center; padding: 40px; background: white; border-radius: 12px;">
-          <p style="color: #7f8c8d; font-size: 1.1rem;">No se encontraron parejas disponibles en el sistema que cumplan con este criterio de filtrado por el momento. 🐾</p>
-          <a href="/home" class="button" style="text-decoration: none; display: inline-block; padding: 10px 20px; background: #3498db; color: white; border-radius: 6px; margin-top: 15px;">Volver al Inicio</a>
+        <div class="glass-panel" style="width: 100%; text-align: center; padding: 50px; border-radius: 24px; max-width: 600px; margin: 40px auto;">
+          <p style="color: var(--text-muted); font-size: 1.2rem; margin-bottom: 30px;">No se encontraron parejas disponibles en el sistema que cumplan con este criterio de filtrado por el momento. 🐾</p>
+          <a href="/home" class="btn-nav" style="display: inline-block; width: auto; padding: 15px 30px;">Volver al Inicio</a>
         </div>
       </c:otherwise>
     </c:choose>
   </div>
+    <div style="text-align: center; margin-top: 30px; margin-bottom: 50px;">
+        <a href="/home" style="color: var(--secondary); text-decoration: none; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">◀ Volver al Panel Principal</a>
+    </div>
 </body>
 </html>

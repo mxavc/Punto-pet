@@ -18,18 +18,21 @@
     <h1 class="main-title">Mis Mascotas Registradas 🐾</h1>
 </div>
 
-    <div style="max-width: 900px; margin: 0 auto; display: flex; gap: 20px; flex-wrap: wrap; padding: 20px;">
+    <div style="max-width: 1000px; margin: 0 auto; display: flex; gap: 30px; flex-wrap: wrap; padding: 20px; justify-content: center;">
         <c:forEach var="mascota" items="${mascotas}">
-            <div class="card" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); width: 260px; padding: 20px; text-align: center;">
-                <h3>${mascota.nombre}</h3>
-                <p style="color: #7f8c8d; margin: 5px 0;">${mascota.raza}</p>
-                <p style="font-size: 0.9rem; font-weight: bold; color: #3498db;">${mascota.edadCalculada}</p>
+            <div class="card" style="width: 280px; text-align: center;">
+                <h3 class="text-gradient" style="font-size: 1.8rem; margin-bottom: 10px;">${mascota.nombre}</h3>
+                <p style="color: var(--text-muted); margin: 5px 0; font-size: 1.1rem;">${mascota.raza}</p>
+                <p style="font-size: 1rem; font-weight: bold; color: var(--secondary); margin-bottom: 25px;">${mascota.edadCalculada}</p>
 
-                <div style="margin-top: 15px;">
-                    <a href="/mascotas/detalle/${mascota.id}" style="background: #3498db; color: white; padding: 8px 16px; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: bold;">Ver Perfil Completo</a>
+                <div>
+                    <a href="/mascotas/detalle/${mascota.id}" class="btn-nav" style="padding: 12px 24px; font-size: 0.9rem;">Ver Perfil Completo</a>
                 </div>
             </div>
         </c:forEach>
+    </div>
+    <div style="text-align: center; margin-top: 30px; margin-bottom: 50px;">
+        <a href="/home" style="color: var(--secondary); text-decoration: none; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">◀ Volver al Panel Principal</a>
     </div>
 </body>
 </html>
