@@ -47,10 +47,17 @@ public class MascotaService {
         }
 
         // 3. Validación de Fotos (CA01.5)
-        if (fotos == null || fotos.isEmpty() || fotos.size() > 5) {
+        if (fotos == null || fotos.isEmpty() || fotos.get(0).isEmpty() || fotos.size() > 5) {
             throw new IllegalArgumentException("Se requiere entre 1 y 5 fotos");
         }
-        // (Aquí iría la validación del formato JPG/PNG de las fotos)
+        
+        for (MultipartFile foto : fotos) {
+            String contentType = foto.getContentType();
+            if (contentType == null || !contentType.startsWith("image/")) {
+                throw new IllegalArgumentException("Solo se permiten archivos de imagen (JPG, PNG, etc.)");
+            }
+            mascota.getFotos().add(foto.getBytes());
+        }
 
         // 4. Persistencia (CA01.8)
         return mascotaRepository.save(mascota);

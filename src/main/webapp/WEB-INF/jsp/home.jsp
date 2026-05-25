@@ -13,7 +13,7 @@
 <body>
     <div class="header-container">
         <h1 class="main-title" style="font-size: 3rem; margin-bottom: 20px;">¡Bienvenido a Punto-pet! 🐾</h1>
-        <p style="color: var(--text-muted); font-size: 1.2rem;">Hola <strong style="color: var(--secondary);">${usuarioLogueado}</strong>, prepárate para gestionar las conexiones de tus mascotas.</p>
+        <p style="color: var(--text-muted); font-size: 1.2rem;">Hola <strong style="color: var(--secondary);">${usuarioLogeado}</strong>, prepárate para gestionar las conexiones de tus mascotas.</p>
     </div>
 
     <div class="form-container glass-panel" style="text-align: center; max-width: 800px; padding: 60px;">
