@@ -46,8 +46,8 @@ public class MascotaController {
     @PostMapping("/guardar")
     public String guardarMascota(@Valid @ModelAttribute("mascota") Mascota mascota, 
                                 BindingResult result,
-                                @RequestParam("fileCertificado") MultipartFile certificado,
-                                @RequestParam("filesFotos") List<MultipartFile> fotos,
+                                @RequestParam(value = "fileCertificado", required = false) MultipartFile certificado,
+                                @RequestParam(value = "filesFotos", required = false) List<MultipartFile> fotos,
                                 Model model,
                                 RedirectAttributes redirectAttributes,
                                 HttpSession session) {
@@ -94,11 +94,11 @@ public class MascotaController {
     public String actualizarMascota(@PathVariable("id") Long id,
                                     @RequestParam("peso") double peso,
                                     @RequestParam("altura") double altura,
-                                    @RequestParam("fileCertificado") MultipartFile certificado,
-                                    @RequestParam("filesFotos") List<MultipartFile> fotos,
+                                    @RequestParam(value = "fileCertificado", required = false) MultipartFile certificado,
+                                    @RequestParam(value = "filesFotos", required = false) List<MultipartFile> fotos,
                                     RedirectAttributes redirectAttributes,
                                     HttpSession session) {
-        if (session.getAttribute("usuarioLogueado") == null) return "redirect:/login";
+        if (session.getAttribute("usuarioLogeado") == null) return "redirect:/login";
 
         try {
             service.actualizarMascota(id, peso, altura, certificado, fotos);
