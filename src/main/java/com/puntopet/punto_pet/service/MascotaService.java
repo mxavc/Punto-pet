@@ -113,4 +113,8 @@ public class MascotaService {
             return mascotaRepository.findByEspecieAndRazaNotAndSexoAndDuenoIdNot(especie, raza, sexoPareja, duenoIdLogueado);
         }
     }
+
+    public void eliminarMascota(Long id) {
+        mascotaRepository.deleteById(id);
+    }
 }

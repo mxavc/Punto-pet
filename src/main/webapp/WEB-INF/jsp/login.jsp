@@ -19,16 +19,25 @@
         <div class="error-message">${error}</div>
     </c:if>
 
+    <c:if test="${not empty mensajeExito}">
+        <div class="success-message">${mensajeExito}</div>
+    </c:if>
+
     <form action="/login" method="POST">
         <div class="form-section" style="border: none; padding: 0;">
-            <label>Usuario</label>
-            <input type="text" name="username" required placeholder="Ej: demouser" />
+            <label>Correo Electrónico</label>
+            <input type="email" name="username" required placeholder="Ej: demo@correo.com" />
 
             <label>Contraseña</label>
             <input type="password" name="password" required placeholder="Ej: demopass" />
         </div>
         <button type="submit">Ingresar a la Plataforma</button>
     </form>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <span style="color: var(--text-muted); font-size: 1rem;"><u>¿No tienes una cuenta?</u></span><br>
+        <a href="/registro" class="btn-nav" style="display: inline-block; margin-top: 15px; padding: 12px 25px; background: linear-gradient(135deg, #20E3B2, #00B4D8); color: white;">Registrate!</a>
+    </div>
 </div>
 </body>
 </html>

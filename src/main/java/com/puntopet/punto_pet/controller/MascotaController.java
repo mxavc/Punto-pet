@@ -18,9 +18,11 @@ import java.util.List;
 public class MascotaController {
 
     private final MascotaService service;
+    private final com.puntopet.punto_pet.service.UsuarioService usuarioService;
 
-    public MascotaController(MascotaService service) {
+    public MascotaController(MascotaService service, com.puntopet.punto_pet.service.UsuarioService usuarioService) {
         this.service = service;
+        this.usuarioService = usuarioService;
     }
 
     // Si entras a localhost:8080/mascotas/ te lleva al formulario
@@ -83,10 +85,16 @@ public class MascotaController {
 
     @GetMapping("/detalle/{id}")
     public String verDetalle(@PathVariable("id") Long id, HttpSession session, Model model) {
-        if (session.getAttribute("usuarioLogeado") == null) return "redirect:/login";
+        String usuarioActual = (String) session.getAttribute("usuarioLogeado");
+        if (usuarioActual == null) return "redirect:/login";
 
         Mascota mascota = service.obtenerPorId(id);
         model.addAttribute("mascota", mascota);
+        
+        Usuario dueno = usuarioService.obtenerPorCorreo(mascota.getDuenoId());
+        model.addAttribute("dueno", dueno);
+        model.addAttribute("usuarioActual", usuarioActual);
+
         return "detalleMascota"; // Carga detalleMascota.jsp
     }
 
@@ -106,6 +114,20 @@ public class MascotaController {
             return "redirect:/mascotas/detalle/" + id;
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/mascotas/detalle/" + id;
+        }
+    }
+
+    @PostMapping("/eliminar/{id}")
+    public String eliminarMascota(@PathVariable("id") Long id, HttpSession session, RedirectAttributes redirectAttributes) {
+        if (session.getAttribute("usuarioLogeado") == null) return "redirect:/login";
+        
+        try {
+            service.eliminarMascota(id);
+            redirectAttributes.addFlashAttribute("mensajeExito", "Perfil eliminado correctamente");
+            return "redirect:/mascotas/mis-mascotas";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error al eliminar el perfil: " + e.getMessage());
             return "redirect:/mascotas/detalle/" + id;
         }
     }
