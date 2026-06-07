@@ -37,13 +37,12 @@ public class MascotaEntityValidationTest {
         mascota.setFechaNacimiento(LocalDate.now().minusYears(1));
         mascota.setPeso(25.5);
         mascota.setAltura(0.6);
-        mascota.setNombreDueno("Juan Perez");
-        mascota.setTelefonoDueno("1234567890");
+
         return mascota;
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"", " ", "123", "Nombre123"})
+    @ValueSource(strings = { "", " ", "123", "Nombre123" })
     @DisplayName("CA01.1 - Escenario Negativo: Nombre inválido")
     void testInvalidNombre(String nombre) {
         Mascota mascota = createValidMascota();
@@ -53,7 +52,7 @@ public class MascotaEntityValidationTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"Tobby", "Luna de Noche"})
+    @ValueSource(strings = { "Tobby", "Luna de Noche" })
     @DisplayName("CA01.1 - Escenario Positivo: Nombre válido")
     void testValidNombre(String nombre) {
         Mascota mascota = createValidMascota();
@@ -63,7 +62,7 @@ public class MascotaEntityValidationTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"", " "})
+    @ValueSource(strings = { "", " " })
     @DisplayName("CA01.2 - Escenario Negativo: Especie, Raza o Sexo en blanco")
     void testBlankFields(String value) {
         Mascota mascota = createValidMascota();
@@ -93,7 +92,7 @@ public class MascotaEntityValidationTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {0.0, -1.0})
+    @ValueSource(doubles = { 0.0, -1.0 })
     @DisplayName("CA01.4 - Escenario Negativo: Peso menor o igual a 0")
     void testInvalidPeso(double peso) {
         Mascota mascota = createValidMascota();
@@ -104,7 +103,7 @@ public class MascotaEntityValidationTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {0.0, -1.0})
+    @ValueSource(doubles = { 0.0, -1.0 })
     @DisplayName("CA01.4 - Escenario Negativo: Altura menor o igual a 0")
     void testInvalidAltura(double altura) {
         Mascota mascota = createValidMascota();
@@ -115,21 +114,19 @@ public class MascotaEntityValidationTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"", " ", "Juan123"})
+    @ValueSource(strings = { "", " ", "Juan123" })
     @DisplayName("CA01.5 - Escenario Negativo: Nombre de dueño inválido")
     void testInvalidNombreDueno(String nombre) {
         Mascota mascota = createValidMascota();
-        mascota.setNombreDueno(nombre);
         Set<ConstraintViolation<Mascota>> violations = validator.validate(mascota);
         assertFalse(violations.isEmpty());
     }
 
     @ParameterizedTest
-    @CsvSource({"123-456", "telefono", "123 456"})
+    @CsvSource({ "123-456", "telefono", "123 456" })
     @DisplayName("CA01.6 - Escenario Negativo: Teléfono de dueño inválido")
     void testInvalidTelefonoDueno(String telefono) {
         Mascota mascota = createValidMascota();
-        mascota.setTelefonoDueno(telefono);
         Set<ConstraintViolation<Mascota>> violations = validator.validate(mascota);
         assertFalse(violations.isEmpty());
         assertEquals("El teléfono solo debe contener números", violations.iterator().next().getMessage());

@@ -18,6 +18,10 @@
     <h1 class="main-title">Mis Mascotas Registradas 🐾</h1>
 </div>
 
+<c:if test="${not empty mensajeExito}">
+    <div class="success-message" style="max-width: 600px; margin: 0 auto 30px auto;">${mensajeExito}</div>
+</c:if>
+
     <div style="max-width: 1000px; margin: 0 auto; display: flex; gap: 30px; flex-wrap: wrap; padding: 20px; justify-content: center;">
         <c:forEach var="mascota" items="${mascotas}">
             <div class="card" style="width: 280px; text-align: center;">
