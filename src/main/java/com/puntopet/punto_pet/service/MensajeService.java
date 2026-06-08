@@ -27,4 +27,8 @@ public class MensajeService {
     public List<Mensaje> obtenerMensajesDeUsuario(String destinatarioId) {
         return mensajeRepository.findByDestinatarioIdOrderByFechaEnviadoDesc(destinatarioId);
     }
+
+    public List<Mensaje> obtenerMisMensajes(String correo) {
+        return mensajeRepository.findByRemitenteIdOrDestinatarioIdOrderByFechaEnviadoDesc(correo, correo);
+    }
 }

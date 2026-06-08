@@ -23,6 +23,7 @@
             <a href="/mascotas/registro" class="btn-nav" style="max-width: 400px; background: linear-gradient(135deg, #FF3366, #FF6B6B);">➕ Registrar nueva Mascota</a>
             <a href="/mascotas/mis-mascotas" class="btn-nav" style="max-width: 400px; background: linear-gradient(135deg, #20E3B2, #00B4D8);">📋 Ver Mis Mascotas</a>
             <a href="/parejas/buscar" class="btn-nav" style="max-width: 400px; background: linear-gradient(135deg, #9D4EDD, #C77DFF);">🔍 Buscar Parejas</a>
+            <a href="/mensajes/mis-mensajes" class="btn-nav" style="max-width: 400px; background: linear-gradient(135deg, #F9C80E, #FF9F1C);">✉️ Mis Mensajes</a>
         </div>
 
         <div style="margin-top: 50px;">
