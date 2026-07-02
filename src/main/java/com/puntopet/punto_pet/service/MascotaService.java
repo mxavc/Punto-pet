@@ -108,10 +108,19 @@ public class MascotaService {
         String raza = miMascota.getRaza();
 
         if ("MISMA_RAZA".equals(tipoFiltro)) {
-            return mascotaRepository.findByEspecieAndRazaAndSexoAndDuenoIdNot(especie, raza, sexoPareja, duenoIdLogueado);
+            return mascotaRepository.findByEspecieAndRazaAndSexoAndDuenoIdNotAndBloqueadaEnBusquedasFalse(especie, raza, sexoPareja, duenoIdLogueado);
         } else {
-            return mascotaRepository.findByEspecieAndRazaNotAndSexoAndDuenoIdNot(especie, raza, sexoPareja, duenoIdLogueado);
+            return mascotaRepository.findByEspecieAndRazaNotAndSexoAndDuenoIdNotAndBloqueadaEnBusquedasFalse(especie, raza, sexoPareja, duenoIdLogueado);
         }
+    }
+
+    public void cambiarEstadoBloqueo(Long id, boolean bloqueada) {
+        Mascota mascota = mascotaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Mascota no encontrada"));
+        if (mascota.isBloqueadaEnBusquedas() == bloqueada) {
+            throw new IllegalArgumentException(bloqueada ? "Esta mascota ya está bloqueada" : "Esta mascota ya está desbloqueada");
+        }
+        mascota.setBloqueadaEnBusquedas(bloqueada);
+        mascotaRepository.save(mascota);
     }
 
     public void eliminarMascota(Long id) {

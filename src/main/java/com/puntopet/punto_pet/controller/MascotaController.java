@@ -19,10 +19,12 @@ public class MascotaController {
 
     private final MascotaService service;
     private final com.puntopet.punto_pet.service.UsuarioService usuarioService;
+    private final com.puntopet.punto_pet.service.NotificacionService notificacionService;
 
-    public MascotaController(MascotaService service, com.puntopet.punto_pet.service.UsuarioService usuarioService) {
+    public MascotaController(MascotaService service, com.puntopet.punto_pet.service.UsuarioService usuarioService, com.puntopet.punto_pet.service.NotificacionService notificacionService) {
         this.service = service;
         this.usuarioService = usuarioService;
+        this.notificacionService = notificacionService;
     }
 
     // Si entras a localhost:8080/mascotas/ te lleva al formulario
@@ -95,6 +97,10 @@ public class MascotaController {
         model.addAttribute("dueno", dueno);
         model.addAttribute("usuarioActual", usuarioActual);
 
+        if (!usuarioActual.equals(mascota.getDuenoId())) {
+            notificacionService.crearNotificacion(mascota.getDuenoId(), "Tu mascota " + mascota.getNombre() + " fue visualizada");
+        }
+
         return "detalleMascota"; // Carga detalleMascota.jsp
     }
 
@@ -116,6 +122,34 @@ public class MascotaController {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/mascotas/detalle/" + id;
         }
+    }
+
+    @PostMapping("/bloquear/{id}")
+    public String bloquearMascota(@PathVariable("id") Long id, HttpSession session, RedirectAttributes redirectAttributes) {
+        String usuario = (String) session.getAttribute("usuarioLogeado");
+        if (usuario == null) return "redirect:/login";
+        
+        try {
+            service.cambiarEstadoBloqueo(id, true);
+            redirectAttributes.addFlashAttribute("mensajeExito", "Mascota bloqueada en búsquedas");
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+        return "redirect:/mascotas/detalle/" + id;
+    }
+
+    @PostMapping("/desbloquear/{id}")
+    public String desbloquearMascota(@PathVariable("id") Long id, HttpSession session, RedirectAttributes redirectAttributes) {
+        String usuario = (String) session.getAttribute("usuarioLogeado");
+        if (usuario == null) return "redirect:/login";
+        
+        try {
+            service.cambiarEstadoBloqueo(id, false);
+            redirectAttributes.addFlashAttribute("mensajeExito", "Mascota desbloqueada");
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+        return "redirect:/mascotas/detalle/" + id;
     }
 
     @PostMapping("/eliminar/{id}")

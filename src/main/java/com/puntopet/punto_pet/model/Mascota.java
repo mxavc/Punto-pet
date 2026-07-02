@@ -44,6 +44,9 @@ public class Mascota {
 
     private String duenoId;
 
+    @Column(nullable = false)
+    private boolean bloqueadaEnBusquedas = false;
+
     @Lob
     private byte[] certificadoPdf;
 
@@ -132,6 +135,10 @@ public class Mascota {
     public String getDuenoId() { return duenoId; }
 
     public void setDuenoId(String duenoId) { this.duenoId = duenoId; }
+
+    public boolean isBloqueadaEnBusquedas() { return bloqueadaEnBusquedas; }
+
+    public void setBloqueadaEnBusquedas(boolean bloqueadaEnBusquedas) { this.bloqueadaEnBusquedas = bloqueadaEnBusquedas; }
 
     public byte[] getCertificadoPdf() {
         return certificadoPdf;

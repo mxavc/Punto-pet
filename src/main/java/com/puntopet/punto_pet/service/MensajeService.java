@@ -10,9 +10,11 @@ import java.util.List;
 public class MensajeService {
     
     private final MensajeRepository mensajeRepository;
+    private final NotificacionService notificacionService;
 
-    public MensajeService(MensajeRepository mensajeRepository) {
+    public MensajeService(MensajeRepository mensajeRepository, NotificacionService notificacionService) {
         this.mensajeRepository = mensajeRepository;
+        this.notificacionService = notificacionService;
     }
 
     public void enviarMensaje(String remitenteId, String destinatarioId, String contenido) {
@@ -22,6 +24,8 @@ public class MensajeService {
         
         Mensaje mensaje = new Mensaje(remitenteId, destinatarioId, contenido.trim());
         mensajeRepository.save(mensaje);
+
+        notificacionService.crearNotificacion(destinatarioId, "Has recibido un nuevo mensaje");
     }
 
     public List<Mensaje> obtenerMensajesDeUsuario(String destinatarioId) {

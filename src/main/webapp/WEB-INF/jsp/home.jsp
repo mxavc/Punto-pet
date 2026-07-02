@@ -26,6 +26,37 @@
             <a href="/mensajes/mis-mensajes" class="btn-nav" style="max-width: 400px; background: linear-gradient(135deg, #F9C80E, #FF9F1C);">✉️ Mis Mensajes</a>
         </div>
 
+        <div style="margin-top: 40px; text-align: left;">
+            <h3 style="color: #FFF; font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                🔔 Mis Notificaciones 
+                <c:if test="${not empty notificaciones}">
+                    <span style="background: #FF4B4B; color: white; padding: 2px 10px; border-radius: 20px; font-size: 0.9rem;">${notificaciones.size()} nuevas</span>
+                </c:if>
+            </h3>
+            <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
+                <c:choose>
+                    <c:when test="${not empty notificaciones}">
+                        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 15px;">
+                            <c:forEach var="notif" items="${notificaciones}">
+                                <li style="display: flex; justify-content: space-between; align-items: center; background: rgba(32, 227, 178, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid var(--secondary);">
+                                    <div>
+                                        <p style="color: #FFF; margin: 0 0 5px 0; font-size: 1.05rem;">${notif.mensaje}</p>
+                                        <small style="color: var(--text-muted);">${notif.fecha.toLocalDate()} ${notif.fecha.toLocalTime().withNano(0)}</small>
+                                    </div>
+                                    <form action="/notificaciones/leer/${notif.id}" method="POST" style="margin: 0;">
+                                        <button type="submit" style="background: transparent; border: 1px solid var(--secondary); color: var(--secondary); padding: 5px 15px; font-size: 0.9rem; border-radius: 8px;">✔ Marcar Leída</button>
+                                    </form>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </c:when>
+                    <c:otherwise>
+                        <p style="color: var(--text-muted); font-style: italic; margin: 0; text-align: center;">No tienes notificaciones</p>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+        </div>
+
         <div style="margin-top: 50px;">
             <a href="/logout" class="btn-logout" style="color: #FF4B4B; text-decoration: none; font-size: 1rem; font-weight: 600; padding: 10px 20px; border: 1px solid rgba(255, 75, 75, 0.3); border-radius: 20px; transition: all 0.3s;">Cerrar Sesión</a>
         </div>
