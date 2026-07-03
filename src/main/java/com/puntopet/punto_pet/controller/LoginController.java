@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class LoginController {
     private final UsuarioService usuarioService;
+    private final com.puntopet.punto_pet.service.NotificacionService notificacionService;
 
-    public LoginController(UsuarioService usuarioService) {
+    public LoginController(UsuarioService usuarioService, com.puntopet.punto_pet.service.NotificacionService notificacionService) {
         this.usuarioService = usuarioService;
+        this.notificacionService = notificacionService;
     }
 
     @GetMapping("/login")
@@ -49,10 +51,16 @@ public class LoginController {
     }
 
     @GetMapping("/home")
-    public String mostrarHome(HttpSession session){
-        if (session.getAttribute("usuarioLogeado") == null){
+    public String mostrarHome(HttpSession session, Model model){
+        String usuario = (String) session.getAttribute("usuarioLogeado");
+        if (usuario == null){
             return "redirect:/login";
         }
+        model.addAttribute("usuarioLogeado", usuario);
+
+        java.util.List<com.puntopet.punto_pet.model.Notificacion> notificaciones = notificacionService.obtenerNotificacionesNoLeidas(usuario);
+        model.addAttribute("notificaciones", notificaciones);
+
         return "home";
     }
 

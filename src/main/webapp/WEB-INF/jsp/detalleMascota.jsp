@@ -95,7 +95,21 @@
                 </form>
 
                 <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255, 75, 75, 0.3);">
-                    <button type="button" onclick="mostrarModalEliminar()" style="background: linear-gradient(135deg, #FF4B4B, #c0392b); padding: 14px 35px; font-size: 1.1rem; max-width: 300px; margin: 0 auto; box-shadow: 0 10px 20px rgba(255, 75, 75, 0.3);">🗑️ Eliminar perfil</button>
+                    <!-- Block / Unblock logic -->
+                    <c:choose>
+                        <c:when test="${mascota.bloqueadaEnBusquedas}">
+                            <form action="/mascotas/desbloquear/${mascota.id}" method="POST" style="display:inline-block; margin-right: 15px;">
+                                <button type="submit" style="background: linear-gradient(135deg, #00B4D8, #20E3B2); padding: 14px 35px; font-size: 1.1rem; box-shadow: 0 10px 20px rgba(32, 227, 178, 0.3);">🔓 Desbloquear en búsquedas</button>
+                            </form>
+                        </c:when>
+                        <c:otherwise>
+                            <form action="/mascotas/bloquear/${mascota.id}" method="POST" style="display:inline-block; margin-right: 15px;">
+                                <button type="submit" style="background: linear-gradient(135deg, #F9C80E, #FF9F1C); padding: 14px 35px; font-size: 1.1rem; box-shadow: 0 10px 20px rgba(255, 159, 28, 0.3);">🔒 Bloquear en búsquedas</button>
+                            </form>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <button type="button" onclick="mostrarModalEliminar()" style="background: linear-gradient(135deg, #FF4B4B, #c0392b); padding: 14px 35px; font-size: 1.1rem; max-width: 300px; box-shadow: 0 10px 20px rgba(255, 75, 75, 0.3);">🗑️ Eliminar perfil</button>
                 </div>
             </c:when>
             <c:otherwise>
