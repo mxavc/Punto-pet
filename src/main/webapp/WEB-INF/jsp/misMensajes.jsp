@@ -1,9 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-            <html>
+            <html lang="es">
 
             <head>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Punto-pet | Mis Mensajes</title>
                 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
             </head>
@@ -77,7 +78,7 @@
                                                         value="${msg.remitenteId}" />
                                                     <textarea name="contenido" rows="3"
                                                         style="width: 100%; border-radius: 8px; padding: 10px; background: rgba(0,0,0,0.5); color: white; border: 1px solid var(--secondary); margin-bottom: 10px; resize: vertical;"
-                                                        placeholder="Escribe tu respuesta..."></textarea>
+                                                        placeholder="Escribe tu respuesta..." aria-label="Contenido de respuesta"></textarea>
                                                     <button type="submit"
                                                         style="background: var(--secondary); padding: 8px 20px;">Enviar
                                                         Respuesta</button>

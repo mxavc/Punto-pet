@@ -1,8 +1,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <html>
+<html lang="es">
 
         <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Punto-pet | Registro</title>
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
         </head>
@@ -24,54 +25,54 @@
 
                     <div class="form-section">
                         <h3 class="text-gradient">Informacion de la Mascota</h3>
-                        <label>Nombre de la Mascota</label>
+                        <label for="nombre">Nombre de la Mascota</label>
                         <form:input path="nombre" id="nombre" placeholder="Ej: Sparky" />
                         <form:errors path="nombre" cssClass="error-message" />
                         <span id="nombreError" class="realtime-error" style="display:none;">El nombre solo debe contener
                             letras.</span>
 
-                        <label>Especie</label>
+                        <label for="especie">Especie</label>
                         <form:select path="especie" id="especie" onchange="cargarRazas()">
                             <form:option value="" label="-- Seleccione --" />
                             <form:option value="perro" label="Perro" />
                             <form:option value="gato" label="Gato" />
                         </form:select>
 
-                        <label>Raza</label>
+                        <label for="raza">Raza</label>
                         <form:select path="raza" id="raza">
                             <form:option value="" label="Seleccione primero la especie" />
                         </form:select>
 
-                        <label>Sexo</label>
+                        <span style="color: var(--text-muted); font-weight: bold; display: block; margin-bottom: 8px;">Sexo</span>
                         <div class="radio-group">
-                            <label>
-                                <form:radiobutton path="sexo" value="Macho" /> Macho
+                            <label for="sexoMacho">
+                                <form:radiobutton path="sexo" id="sexoMacho" value="Macho" /> Macho
                             </label>
-                            <label>
-                                <form:radiobutton path="sexo" value="Hembra" /> Hembra
+                            <label for="sexoHembra">
+                                <form:radiobutton path="sexo" id="sexoHembra" value="Hembra" /> Hembra
                             </label>
                         </div>
 
-                        <label>Fecha de Nacimiento</label>
-                        <form:input path="fechaNacimiento" type="date" style="color-scheme: dark;" />
+                        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                        <form:input path="fechaNacimiento" id="fechaNacimiento" type="date" style="color-scheme: dark;" />
 
-                        <label>Peso (kg)</label>
-                        <form:input path="peso" type="number" step="0.1" />
+                        <label for="peso">Peso (kg)</label>
+                        <form:input path="peso" id="peso" type="number" step="0.1" />
                         <form:errors path="peso" cssClass="error-message" />
 
-                        <label>Altura (cm)</label>
-                        <form:input path="altura" type="number" step="0.1" />
+                        <label for="altura">Altura (cm)</label>
+                        <form:input path="altura" id="altura" type="number" step="0.1" />
                         <form:errors path="altura" cssClass="error-message" />
                     </div>
 
                     <!-- Archivos -->
                     <div class="form-section">
                         <h3 class="text-gradient">Archivos Adicionales</h3>
-                        <label>Certificado Pedigree (PDF)</label>
-                        <input type="file" name="fileCertificado" accept=".pdf" />
+                        <label for="fileCertificado">Certificado Pedigree (PDF)</label>
+                        <input type="file" id="fileCertificado" name="fileCertificado" accept=".pdf" />
 
-                        <label>Fotos (1-5)</label>
-                        <input type="file" name="filesFotos" multiple accept="image/*" />
+                        <label for="filesFotos">Fotos (1-5)</label>
+                        <input type="file" id="filesFotos" name="filesFotos" multiple accept="image/*" />
                     </div>
 
                     <button type="submit" style="margin-top: 20px;">Finalizar Registro</button>

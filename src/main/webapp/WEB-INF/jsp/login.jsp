@@ -7,8 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<html lang="es">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Punto-pet | Iniciar Sesión</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 </head>
@@ -26,11 +27,11 @@
 
     <form action="${pageContext.request.contextPath}/login" method="POST">
         <div class="form-section" style="border: none; padding: 0;">
-            <label>Correo Electrónico</label>
-            <input type="email" name="username" required placeholder="Ej: demo@correo.com" />
+            <label for="username">Correo Electrónico</label>
+            <input type="email" id="username" name="username" required placeholder="Ej: demo@correo.com" />
 
-            <label>Contraseña</label>
-            <input type="password" name="password" required placeholder="Ej: demopass" />
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" required placeholder="Ej: demopass" />
         </div>
         <button type="submit">Ingresar a la Plataforma</button>
     </form>

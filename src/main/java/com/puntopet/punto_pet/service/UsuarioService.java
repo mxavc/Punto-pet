@@ -3,10 +3,12 @@ import com.puntopet.punto_pet.model.Usuario;
 import com.puntopet.punto_pet.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -14,7 +16,7 @@ public class UsuarioService {
     public boolean autenticar(String correo, String password) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findByCorreo(correo);
         if (usuarioOpt.isPresent()) {
-            return usuarioOpt.get().getPassword().equals(password);
+            return passwordEncoder.matches(password, usuarioOpt.get().getPassword());
         }
         return false;
     }
@@ -47,6 +49,7 @@ public class UsuarioService {
             throw new IllegalArgumentException("Correo electrónico inválido");
         }
 
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         usuarioRepository.save(usuario);
     }
 

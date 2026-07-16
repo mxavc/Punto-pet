@@ -7,26 +7,31 @@ import com.puntopet.punto_pet.repository.MascotaRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.Collections;
 
 @Configuration
 public class DataInitializer {
+    private static final Logger log = LoggerFactory.getLogger(DataInitializer.class);
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Bean
     public CommandLineRunner initData(UsuarioRepository usuarioRepository, MascotaRepository mascotaRepository) {
         return args -> {
             if (usuarioRepository.findByCorreo("demo@correo.com").isEmpty()) {
-                usuarioRepository.save(new Usuario("Demo", "User", "+593", "0999999999", "demo@correo.com", "Demo123!", "Quito", "Norte"));
-                System.out.println("Usuario de prueba demouser creado.");
+                usuarioRepository.save(new Usuario("Demo", "User", "+593", "0999999999", "demo@correo.com", passwordEncoder.encode("Demo123!"), "Quito", "Norte"));
+                log.info("Usuario de prueba demouser creado.");
             }
 
             if (usuarioRepository.findByCorreo("perros@correo.com").isEmpty()) {
-                usuarioRepository.save(new Usuario("Owner", "Perros", "+593", "0999999998", "perros@correo.com", "Demo123!", "Guayaquil", "Sur"));
+                usuarioRepository.save(new Usuario("Owner", "Perros", "+593", "0999999998", "perros@correo.com", passwordEncoder.encode("Demo123!"), "Guayaquil", "Sur"));
             }
 
             if (usuarioRepository.findByCorreo("gatos@correo.com").isEmpty()) {
-                usuarioRepository.save(new Usuario("Owner", "Gatos", "+593", "0999999997", "gatos@correo.com", "Demo123!", "Cuenca", "Centro"));
+                usuarioRepository.save(new Usuario("Owner", "Gatos", "+593", "0999999997", "gatos@correo.com", passwordEncoder.encode("Demo123!"), "Cuenca", "Centro"));
             }
 
             // Un byte array dummy para simular los bytes de la foto principal obligatoria
@@ -104,7 +109,7 @@ public class DataInitializer {
                 gatoCandidato.setFotos(Collections.singletonList(fotoDummy));
                 mascotaRepository.save(gatoCandidato);
 
-                System.out.println("📋 Datos de prueba inyectados con éxito en PostgreSQL.");
+                log.info("📋 Datos de prueba inyectados con éxito en PostgreSQL.");
             }
         };
     }

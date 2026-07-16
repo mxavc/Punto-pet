@@ -8,8 +8,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="es">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Punto-pet | Perfil de ${mascota.nombre}</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
     <style>
@@ -79,17 +80,17 @@
                 <h2 style="color: #FFF; font-weight: 300;">Actualizar Información Médica y Archivos 🔄</h2>
                 <form action="${pageContext.request.contextPath}/mascotas/actualizar/${mascota.id}" method="POST" enctype="multipart/form-data" style="margin-top: 30px;">
 
-                    <label>Modificar Peso (kg)</label>
-                    <input type="number" name="peso" step="0.1" value="${mascota.peso}" required min="1"/>
+                    <label for="pesoActualizar">Modificar Peso (kg)</label>
+                    <input type="number" id="pesoActualizar" name="peso" step="0.1" value="${mascota.peso}" required min="1"/>
 
-                    <label>Modificar Altura (cm)</label>
-                    <input type="number" name="altura" step="0.1" value="${mascota.altura}" required min="1"/>
+                    <label for="alturaActualizar">Modificar Altura (cm)</label>
+                    <input type="number" id="alturaActualizar" name="altura" step="0.1" value="${mascota.altura}" required min="1"/>
 
-                    <label>Agregar más fotos al Historial (Opcional)</label>
-                    <input type="file" name="filesFotos" multiple accept="image/*" />
+                    <label for="filesFotosActualizar">Agregar más fotos al Historial (Opcional)</label>
+                    <input type="file" id="filesFotosActualizar" name="filesFotos" multiple accept="image/*" />
 
-                    <label>Reemplazar/Subir Certificado Pedigree (PDF - Máx 5MB)</label>
-                    <input type="file" name="fileCertificado" accept=".pdf" />
+                    <label for="fileCertificadoActualizar">Reemplazar/Subir Certificado Pedigree (PDF - Máx 5MB)</label>
+                    <input type="file" id="fileCertificadoActualizar" name="fileCertificado" accept=".pdf" />
 
                     <button type="submit" style="margin-top: 25px;">Guardar Cambios de Perfil</button>
                 </form>

@@ -23,8 +23,8 @@
                     <form action="${pageContext.request.contextPath}/mensajes/enviar" method="POST" style="margin: 0;">
                         <input type="hidden" name="destinatarioId" value="${dueno.correo}" />
                         <input type="hidden" name="mascotaId" value="${mascota.id}" />
-                        <label style="color: white; font-size: 0.9rem; display: block; margin-bottom: 8px;">Escribe tu mensaje:</label>
-                        <textarea name="contenido" rows="4" style="width: 100%; box-sizing: border-box; border-radius: 10px; padding: 10px; background: rgba(0,0,0,0.4); color: white; border: 1px solid var(--secondary); margin-bottom: 15px; resize: vertical;" placeholder="Ej: ¡Hola! Me encantaría que nuestras mascotas se conozcan..."></textarea>
+                        <label for="contenidoMensaje" style="color: white; font-size: 0.9rem; display: block; margin-bottom: 8px;">Escribe tu mensaje:</label>
+                        <textarea id="contenidoMensaje" name="contenido" rows="4" style="width: 100%; box-sizing: border-box; border-radius: 10px; padding: 10px; background: rgba(0,0,0,0.4); color: white; border: 1px solid var(--secondary); margin-bottom: 15px; resize: vertical;" placeholder="Ej: ¡Hola! Me encantaría que nuestras mascotas se conozcan..."></textarea>
                         <button type="submit" style="background: var(--primary); padding: 10px 20px; width: 100%;">📤 Enviar Mensaje</button>
                     </form>
                 </div>
