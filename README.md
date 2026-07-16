@@ -15,3 +15,5 @@ Abre una terminal y posiciónate en la carpeta raíz del proyecto (donde se encu
 7. Para detener la base de datos, puedes usar el comando: docker-compose down -v
 
 Comportamiento esperado: El sistema interceptará esta petición a la raíz y realizará una redirección automática (redirect:/mascotas/registro) enviándote directamente al formulario principal.
+El correo para ingresar es: demo@correo.com
+El pass: Demo123!
