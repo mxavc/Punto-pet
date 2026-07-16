@@ -36,7 +36,7 @@ public class MascotaServiceTest {
     private List<MultipartFile> fotos;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
         mascota = new Mascota();
         mascota.setNombre("Tobby");
         mascota.setEspecie("Perro");
@@ -49,7 +49,10 @@ public class MascotaServiceTest {
 
         certificadoPdf = mock(MultipartFile.class);
         fotos = new ArrayList<>();
-        fotos.add(mock(MultipartFile.class));
+        MultipartFile fotoMock = mock(MultipartFile.class);
+        lenient().when(fotoMock.getContentType()).thenReturn("image/jpeg");
+        lenient().when(fotoMock.getBytes()).thenReturn(new byte[]{1, 2, 3});
+        fotos.add(fotoMock);
     }
 
     @Test

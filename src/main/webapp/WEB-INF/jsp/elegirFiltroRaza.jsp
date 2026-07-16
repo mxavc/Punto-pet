@@ -7,7 +7,7 @@
 
                 <head>
                     <title>Punto-pet | Opciones de Filtro</title>
-                    <link rel="stylesheet" type="text/css" href="/css/style.css">
+                    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
                 </head>
 
                 <body>
@@ -17,7 +17,7 @@
                         <p style="color: var(--text-muted); margin-bottom: 40px; font-size: 1.1rem;">Selecciona el
                             filtro de raza para prever los cachorros resultantes.</p>
 
-                        <form action="/parejas/resultados" method="GET">
+                        <form action="${pageContext.request.contextPath}/parejas/resultados" method="GET">
                             <input type="hidden" name="mascotaId" value="${mascotaId}" />
 
                             <div style="margin-bottom: 30px; display: flex; flex-direction: column; gap: 20px;">
@@ -32,7 +32,7 @@
                                 </button>
                             </div>
                         </form>
-                        <a href="/home"
+                        <a href="${pageContext.request.contextPath}/home"
                             style="color: var(--danger); text-decoration: none; font-size: 1rem; font-weight: 600; text-transform: uppercase;">Cancelar
                             búsqueda</a>
                     </div>

@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Mascotas Registradas</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
 <div class="header-container">
@@ -30,13 +30,13 @@
                 <p style="font-size: 1rem; font-weight: bold; color: var(--secondary); margin-bottom: 25px;">${mascota.edadCalculada}</p>
 
                 <div>
-                    <a href="/mascotas/detalle/${mascota.id}" class="btn-nav" style="padding: 12px 24px; font-size: 0.9rem;">Ver Perfil Completo</a>
+                    <a href="${pageContext.request.contextPath}/mascotas/detalle/${mascota.id}" class="btn-nav" style="padding: 12px 24px; font-size: 0.9rem;">Ver Perfil Completo</a>
                 </div>
             </div>
         </c:forEach>
     </div>
     <div style="text-align: center; margin-top: 30px; margin-bottom: 50px;">
-        <a href="/home" style="color: var(--secondary); text-decoration: none; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">◀ Volver al Panel Principal</a>
+        <a href="${pageContext.request.contextPath}/home" style="color: var(--secondary); text-decoration: none; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">◀ Volver al Panel Principal</a>
     </div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 
         <head>
             <title>Punto-pet | Registro</title>
-            <link rel="stylesheet" type="text/css" href="/css/style.css">
+            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
         </head>
 
         <body>
@@ -76,7 +76,7 @@
 
                     <button type="submit" style="margin-top: 20px;">Finalizar Registro</button>
                     <div style="text-align: center; margin-top: 30px;">
-                        <a href="/home"
+                        <a href="${pageContext.request.contextPath}/home"
                             style="color: var(--secondary); text-decoration: none; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Volver
                             al Panel Principal</a>
                     </div>
@@ -122,15 +122,7 @@
                     }
                 });
 
-                document.getElementById("nombreDueno").addEventListener("input", function () {
-                    const errorSpan = document.getElementById("nombreDuenoError");
-                    if (this.value && !regexLetras.test(this.value)) {
-                        errorSpan.style.display = "block";
-                        errorSpan.style.color = "#e74c3c";
-                    } else {
-                        errorSpan.style.display = "none";
-                    }
-                });
+                // nombreDueno non-existent element check removed
             </script>
         </body>
 

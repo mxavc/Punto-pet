@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Punto-pet | Registro de Usuario</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body style="display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 40px 0;">
 <div class="form-container glass-panel" style="width: 100%; max-width: 700px; margin: 0; box-sizing: border-box;">
@@ -13,7 +13,7 @@
         <div class="error-message">${error}</div>
     </c:if>
 
-    <form action="/registro" method="POST">
+    <form action="${pageContext.request.contextPath}/registro" method="POST">
         <div class="form-section" style="border: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             
             <div style="grid-column: span 1;">
@@ -65,7 +65,7 @@
     </form>
     
     <div style="text-align: center; margin-top: 30px;">
-        <a href="/login" style="color: var(--secondary); text-decoration: none; font-size: 1rem; font-weight: 600;">◀ Volver al Login</a>
+        <a href="${pageContext.request.contextPath}/login" style="color: var(--secondary); text-decoration: none; font-size: 1rem; font-weight: 600;">◀ Volver al Login</a>
     </div>
 </div>
 </body>

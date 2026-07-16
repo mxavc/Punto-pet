@@ -113,22 +113,4 @@ public class MascotaEntityValidationTest {
         assertEquals("La altura debe ser mayor a 0", violations.iterator().next().getMessage());
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = { "", " ", "Juan123" })
-    @DisplayName("CA01.5 - Escenario Negativo: Nombre de dueño inválido")
-    void testInvalidNombreDueno(String nombre) {
-        Mascota mascota = createValidMascota();
-        Set<ConstraintViolation<Mascota>> violations = validator.validate(mascota);
-        assertFalse(violations.isEmpty());
-    }
-
-    @ParameterizedTest
-    @CsvSource({ "123-456", "telefono", "123 456" })
-    @DisplayName("CA01.6 - Escenario Negativo: Teléfono de dueño inválido")
-    void testInvalidTelefonoDueno(String telefono) {
-        Mascota mascota = createValidMascota();
-        Set<ConstraintViolation<Mascota>> violations = validator.validate(mascota);
-        assertFalse(violations.isEmpty());
-        assertEquals("El teléfono solo debe contener números", violations.iterator().next().getMessage());
-    }
 }

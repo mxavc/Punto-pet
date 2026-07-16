@@ -20,7 +20,7 @@
 
                 <!-- Formulario de Mensaje (Oculto por defecto) -->
                 <div id="formularioMensaje" style="display:none; margin-bottom: 25px; text-align: left; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px;">
-                    <form action="/mensajes/enviar" method="POST" style="margin: 0;">
+                    <form action="${pageContext.request.contextPath}/mensajes/enviar" method="POST" style="margin: 0;">
                         <input type="hidden" name="destinatarioId" value="${dueno.correo}" />
                         <input type="hidden" name="mascotaId" value="${mascota.id}" />
                         <label style="color: white; font-size: 0.9rem; display: block; margin-bottom: 8px;">Escribe tu mensaje:</label>

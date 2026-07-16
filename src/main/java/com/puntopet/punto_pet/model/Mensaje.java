@@ -46,4 +46,9 @@ public class Mensaje {
 
     public LocalDateTime getFechaEnviado() { return fechaEnviado; }
     public void setFechaEnviado(LocalDateTime fechaEnviado) { this.fechaEnviado = fechaEnviado; }
+
+    public String getFechaEnviadoFormateada() {
+        if (fechaEnviado == null) return "";
+        return fechaEnviado.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
 }

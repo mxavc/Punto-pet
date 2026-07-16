@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Punto-pet | Perfil de ${mascota.nombre}</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
     <style>
         .profile-container { max-width: 850px; margin: 50px auto; padding: 50px; }
         .gallery { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
@@ -77,7 +77,7 @@
             <c:when test="${usuarioActual eq mascota.duenoId}">
                 <!-- 2. FORMULARIO DE ACTUALIZACIÓN (Opciones de actualización) -->
                 <h2 style="color: #FFF; font-weight: 300;">Actualizar Información Médica y Archivos 🔄</h2>
-                <form action="/mascotas/actualizar/${mascota.id}" method="POST" enctype="multipart/form-data" style="margin-top: 30px;">
+                <form action="${pageContext.request.contextPath}/mascotas/actualizar/${mascota.id}" method="POST" enctype="multipart/form-data" style="margin-top: 30px;">
 
                     <label>Modificar Peso (kg)</label>
                     <input type="number" name="peso" step="0.1" value="${mascota.peso}" required min="1"/>
@@ -98,12 +98,12 @@
                     <!-- Block / Unblock logic -->
                     <c:choose>
                         <c:when test="${mascota.bloqueadaEnBusquedas}">
-                            <form action="/mascotas/desbloquear/${mascota.id}" method="POST" style="display:inline-block; margin-right: 15px;">
+                            <form action="${pageContext.request.contextPath}/mascotas/desbloquear/${mascota.id}" method="POST" style="display:inline-block; margin-right: 15px;">
                                 <button type="submit" style="background: linear-gradient(135deg, #00B4D8, #20E3B2); padding: 14px 35px; font-size: 1.1rem; box-shadow: 0 10px 20px rgba(32, 227, 178, 0.3);">🔓 Desbloquear en búsquedas</button>
                             </form>
                         </c:when>
                         <c:otherwise>
-                            <form action="/mascotas/bloquear/${mascota.id}" method="POST" style="display:inline-block; margin-right: 15px;">
+                            <form action="${pageContext.request.contextPath}/mascotas/bloquear/${mascota.id}" method="POST" style="display:inline-block; margin-right: 15px;">
                                 <button type="submit" style="background: linear-gradient(135deg, #F9C80E, #FF9F1C); padding: 14px 35px; font-size: 1.1rem; box-shadow: 0 10px 20px rgba(255, 159, 28, 0.3);">🔒 Bloquear en búsquedas</button>
                             </form>
                         </c:otherwise>
@@ -121,7 +121,7 @@
         </c:choose>
 
         <div style="text-align: center; margin-top: 40px;">
-            <a href="/mascotas/mis-mascotas" style="color: var(--secondary); text-decoration: none; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">◀ Volver al Listado de Mascotas</a>
+            <a href="${pageContext.request.contextPath}/mascotas/mis-mascotas" style="color: var(--secondary); text-decoration: none; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">◀ Volver al Listado de Mascotas</a>
         </div>
     </div>
 
@@ -132,7 +132,7 @@
             <h2 style="color: #FFF; margin-bottom: 20px;">¿Está seguro de eliminar este perfil?</h2>
             <p style="color: var(--text-muted); margin-bottom: 35px; font-size: 1.1rem;">Esta acción es irreversible y borrará permanentemente la mascota del sistema.</p>
             <div style="display: flex; gap: 20px; justify-content: center;">
-                <form action="/mascotas/eliminar/${mascota.id}" method="POST" style="margin: 0; width: 100%;">
+                <form action="${pageContext.request.contextPath}/mascotas/eliminar/${mascota.id}" method="POST" style="margin: 0; width: 100%;">
                     <button type="submit" style="background: linear-gradient(135deg, #FF4B4B, #c0392b); padding: 14px 10px; margin:0; width: 100%;">Sí</button>
                 </form>
                 <button type="button" onclick="ocultarModalEliminar()" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 14px 10px; margin:0; color: white;">No</button>

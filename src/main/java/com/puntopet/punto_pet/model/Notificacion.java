@@ -41,4 +41,9 @@ public class Notificacion {
     public void setLeida(boolean leida) { this.leida = leida; }
     public LocalDateTime getFecha() { return fecha; }
     public void setFecha(LocalDateTime fecha) { this.fecha = fecha; }
+
+    public String getFechaFormateada() {
+        if (fecha == null) return "";
+        return fecha.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
 }

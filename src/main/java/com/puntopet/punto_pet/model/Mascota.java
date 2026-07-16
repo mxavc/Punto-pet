@@ -44,7 +44,7 @@ public class Mascota {
 
     private String duenoId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "boolean default false")
     private boolean bloqueadaEnBusquedas = false;
 
     @Lob

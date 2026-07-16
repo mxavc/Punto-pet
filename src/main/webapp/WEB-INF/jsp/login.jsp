@@ -6,10 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Punto-pet | Iniciar Sesión</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
 <div class="form-container glass-panel" style="width: 100%; margin: 0; box-sizing: border-box;">
@@ -23,7 +24,7 @@
         <div class="success-message">${mensajeExito}</div>
     </c:if>
 
-    <form action="/login" method="POST">
+    <form action="${pageContext.request.contextPath}/login" method="POST">
         <div class="form-section" style="border: none; padding: 0;">
             <label>Correo Electrónico</label>
             <input type="email" name="username" required placeholder="Ej: demo@correo.com" />
@@ -36,7 +37,7 @@
     
     <div style="text-align: center; margin-top: 30px;">
         <span style="color: var(--text-muted); font-size: 1rem;"><u>¿No tienes una cuenta?</u></span><br>
-        <a href="/registro" class="btn-nav" style="display: inline-block; margin-top: 15px; padding: 12px 25px; background: linear-gradient(135deg, #20E3B2, #00B4D8); color: white;">Registrate!</a>
+        <a href="${pageContext.request.contextPath}/registro" class="btn-nav" style="display: inline-block; margin-top: 15px; padding: 12px 25px; background: linear-gradient(135deg, #20E3B2, #00B4D8); color: white;">Registrate!</a>
     </div>
 </div>
 </body>

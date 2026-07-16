@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Punto-pet | Candidatos Disponibles</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
   <div class="header-container">
@@ -31,7 +31,7 @@
             <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 25px;">Edad: ${pareja.edadCalculada}</p>
 
             <div>
-              <a href="/mascotas/detalle/${pareja.id}" class="btn-nav" style="padding: 12px 20px; font-size: 0.9rem; display: block;">Ver Documentación</a>
+              <a href="${pageContext.request.contextPath}/mascotas/detalle/${pareja.id}" class="btn-nav" style="padding: 12px 20px; font-size: 0.9rem; display: block;">Ver Documentación</a>
             </div>
           </div>
         </c:forEach>
@@ -39,13 +39,13 @@
       <c:otherwise>
         <div class="glass-panel" style="width: 100%; text-align: center; padding: 50px; border-radius: 24px; max-width: 600px; margin: 40px auto;">
           <p style="color: var(--text-muted); font-size: 1.2rem; margin-bottom: 30px;">No se encontraron parejas disponibles en el sistema que cumplan con este criterio de filtrado por el momento. 🐾</p>
-          <a href="/home" class="btn-nav" style="display: inline-block; width: auto; padding: 15px 30px;">Volver al Inicio</a>
+          <a href="${pageContext.request.contextPath}/home" class="btn-nav" style="display: inline-block; width: auto; padding: 15px 30px;">Volver al Inicio</a>
         </div>
       </c:otherwise>
     </c:choose>
   </div>
     <div style="text-align: center; margin-top: 30px; margin-bottom: 50px;">
-        <a href="/home" style="color: var(--secondary); text-decoration: none; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">◀ Volver al Panel Principal</a>
+        <a href="${pageContext.request.contextPath}/home" style="color: var(--secondary); text-decoration: none; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">◀ Volver al Panel Principal</a>
     </div>
 </body>
 </html>
